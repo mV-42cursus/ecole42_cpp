@@ -1,0 +1,48 @@
+- container, iterator, algorithm 을 응용 / 적용해보는 과제
+- ex02
+	- 	std::stack doesn't support iterator becuase of stack's unique feature.
+	{
+		std::stack<int> defaultStack; // 기본적으로 std::deque 사용
+		std::stack<int, std::vector<int>> vectorStack; // std::vector를 기본 컨테이너로 사용
+		std::stack<int, std::list<int>> listStack; // std::list를 기본 컨테이너로 사용
+	}
+
+template<typename T>
+class MutantStack : public std::stack<T>
+{
+public:
+    MutantStack() : std::stack<T>() {}
+
+    MutantStack(const MutantStack<T>& other) : std::stack<T>(other) {}
+
+    MutantStack<T>& operator=(const MutantStack<T>& other)
+    {
+        std::stack<T>::operator=(other);
+        return *this;
+    }
+
+    ~MutantStack() {}
+
+    typedef typename std::stack<T>::container_type::iterator iterator;
+    typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+
+    iterator begin()
+    {
+        return this->c.begin();
+    }
+
+    iterator end()
+    {
+        return this->c.end();
+    }
+
+    const_iterator begin() const
+    {
+        return this->c.begin();
+    }
+
+    const_iterator end() const
+    {
+        return this->c.end();
+    }
+};

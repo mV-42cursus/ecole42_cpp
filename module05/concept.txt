@@ -1,0 +1,5 @@
+1. Syntax Error - Compiler
+2. Logical Error - Debugger
+3. Runtime Error
+	-> Bad Input
+	-> Problem with Resources

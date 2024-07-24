@@ -1,0 +1,30 @@
+In file included from AMateria.hpp:5,
+                 from main.cpp:1:
+ICharacter.hpp:10:28: error: ‘AMateria’ has not been declared
+   10 |         virtual void equip(AMateria* m) = 0;
+      |                            ^~~~~~~~
+main.cpp: In function ‘int main()’:
+main.cpp:7:56: error: invalid new-expression of abstract class type ‘Character’
+    7 | racter *Champion = new Character("dong-kim");
+      |                                            ^
+
+In file included from main.cpp:4:
+Character.hpp:6:7: note:   because the following virtual functions are pure within ‘Character’:
+    6 | class Character : public ICharacter
+      |       ^~~~~~~~~
+In file included from AMateria.hpp:5,
+                 from main.cpp:1:
+ICharacter.hpp:10:22: note:     ‘virtual void ICharacter::equip(int*)’
+   10 |         virtual void equip(AMateria* m) = 0;
+      |                      ^~~~~
+main.cpp:9:25: error: cannot convert ‘Ice*’ to ‘int*’
+    9 |         Champion->equip(new Ice());
+      |                         ^~~~~~~~~
+      |                         |
+      |                         Ice*
+In file included from AMateria.hpp:5,
+                 from main.cpp:1:
+ICharacter.hpp:10:38: note:   initializing argument 1 of ‘virtual void ICharacter::equip(int*)’
+   10 |         virtual void equip(AMateria* m) = 0;
+      |                            ~~~~~~~~~~^
+make: *** [Makefile:25: obj/main.o] Error 1

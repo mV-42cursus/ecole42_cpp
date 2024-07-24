@@ -1,0 +1,48 @@
+Exercise 00: 
+	Polymorphism - Implementing a simple base class Animal with derived classes Dog and Cat that override a makeSound() function.
+Exercise 01: 
+	I don't want to set the world on fire - Introducing a Brain class for Dog and Cat classes, involving dynamic memory management and deep copying.
+Exercise 02: 
+	Abstract class - Modifying the Animal class to prevent it from being instantiated, emphasizing the concept of abstract classes.
+Exercise 03:
+	Interface & recap - Implementing interfaces using pure abstract classes, creating specific classes (AMateria, Ice, Cure, and Character) and interfaces (ICharacter, IMateriaSource) with various functionalities.
+
+[ex00]
+- 왜 소멸자에 virtual 키워드가 필요한지
+	1. Without virtual Destructor:
+		Deleting a derived class object through a base class pointer might only call the base class destructor, potentially leading to resource leaks if the derived class has its own dynamic resources.
+	2. With virtual Destructor:
+		Deleting a derived class object through a base class pointer will call the derived class destructor followed by the base class destructor, ensuring proper cleanup of resources.
+
+	=>  베이스 클래스 포인터를 통해 파생 클래스 객체를 삭제하려 할때, base 클래스 소멸자만 호출 될 위험이 있음
+		virtual 키워드를 통해 이를 방지하여, resource 적 측면에서 확실하게 해제 시킬 수 있음.
+
+- Polymorphism의 핵심은 base class 를 pointer 로 표현하는데 있는가?
+
+- 왜 wrongCat->makesound는 baseclass 멤버 함수를 호출할까
+WrongCat이 WrongAnimal에서 makeSound를 호출하는 이유는,
+C++에서 가상 함수(virtual functions)의 사용 없이 메소드 오버라이딩과 상속을 처리하는 방식 때문입니다. 
+
+이 경우에, WrongCat 클래스는 WrongAnimal의 makeSound 메소드를 오버라이드하지 않거나,
+만약 오버라이드한다 하더라도 그 메소드가 가상 함수로 지정되지 않았기 때문에 다형성을 제대로 활용할 수 없습니다.
+
+가상 함수를 사용하지 않으면 C++는 정적 바인딩(static binding)을 사용하여 컴파일 시간에 메소드 호출을 결정합니다.
+
+이는 실행 시간에 객체의 실제 타입을 기반으로 메소드를 동적으로 선택하는 동적 바인딩(dynamic binding)과 대조됩니다.
+
+가상 함수가 아닌 경우, 베이스 클래스 타입의 포인터나 참조를 통해 파생 클래스 객체를 다룰 때, 베이스 클래스에 정의된 메소드가 호출됩니다.
+
+WrongAnimal과 WrongCat의 설계에서 makeSound 메소드가 가상 함수로 지정되지 않았기 때문에, 
+WrongCat 객체를 WrongAnimal 포인터를 통해 다룰 때 WrongAnimal의 makeSound 메소드가 호출되는 것입니다.
+이는 다형성의 주요 개념과 가상 함수의 중요성을 보여주는 좋은 예시입니다.
+다형성을 올바르게 활용하기 위해서는 베이스 클래스에서 해당 메소드를 가상 함수로 선언해야 합니다.
+
+[ex01]
+- delete[] => new x[];
+- delete => new x;
+
+- Cat member function 에 virtual을 붙이고 안붙이고의 차이는?
+- Animal *cat = new Cat()
+	cat.setIdeas( , ) 는 왜 안되고
+  Cat kitty;
+  kitty.setIdeas( , ) 는 왜 되는거지?

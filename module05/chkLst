@@ -1,0 +1,2 @@
+- 왜 exception 은 class within classs 일까
+	특정 클래스에서만 발생하는 것이므로, 캡슐화를 지킬수 있게됌

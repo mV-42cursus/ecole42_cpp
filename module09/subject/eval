@@ -1,0 +1,5 @@
+For linux:
+`shuf -i 1-1000 -n 3000 | tr "\n" " " `
+	
+For OSX:
+`jot -r 3000 1 1000 | tr '\n' ' '`
